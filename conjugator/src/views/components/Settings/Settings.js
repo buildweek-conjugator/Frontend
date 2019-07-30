@@ -4,30 +4,44 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
 
-
 function Settings() {
 
-    const [settings, setSettings] = useState({})
+    const [settings, setSettings] = useState({
+        "vosotros" : "on",
+
+    })
+    console.log(settings)
+
+    // const toggleCheckbox = (e) => {
+    //     e.preventDefault() // unsure if needed
+
+    // }
+
   return (
     <div>
         <h2>Settings</h2>
-        <Container maxWidth="sm" style={{ backgroundColor: 'white', height: '50vh', boxShadow: "-1px 4px 4px 1px rgba(219,219,219,1)"}}>
-            <form class="settings-form">
+        <Container maxWidth="sm" className="settings-form">
+            <form>
                 <Typography component="h3">
                     Latam Spanish or Spain Spanish
                 </Typography>
-                <div className="vosotros">
+                <div className="form-section vosotros">
                     <label> 
                         <input
                             type='checkbox'
-                            id='vosotros'/>
+                            id='vosotros'
+                            onChange={event => {
+                                console.log("event target", event.target.value) // "vosotros"
+                                setSettings(event.target.value)
+                            }
+                            }/>
                         Include vosotros
                     </label>
                 </div>
-                <div className="moods">
-                    <Typography component="h3">
-                        Grammatical Moods
-                    </Typography>
+                <Typography component="h3">
+                    Grammatical Moods
+                </Typography>
+                <div className="form-section moods">
                     <label> 
                         <input
                             type='checkbox'
@@ -47,10 +61,10 @@ function Settings() {
                         Imperative
                     </label>
                 </div>
-                <div className='tenses'>
-                    <Typography component="h3">
-                        Tenses
-                    </Typography>
+                <Typography component="h3">
+                    Tenses
+                </Typography>
+                <div className='form-section tenses'>
                     <label> 
                         <input
                             type='checkbox'

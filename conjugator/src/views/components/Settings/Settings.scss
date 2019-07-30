@@ -1,3 +1,25 @@
-settings-form {
-    margin: 100px;
+.settings-form {
+    padding: 1.5rem;
+    background-color: white;
+    height: 30rem;
+    box-shadow: -1px 4px 4px 1px rgba(219,219,219,1);
+    display: flex;
+
+    label {
+        padding: 0.4rem;
+    }
+
+    .form-section {
+        margin: 1rem 0;
+    }
+
+    .moods {
+        display: grid;
+        grid-template-columns: 12rem 12rem 12rem;
+    }
+
+    .tenses {
+        display: grid;
+        grid-template-columns: 12rem 12rem;
+    }
 }
