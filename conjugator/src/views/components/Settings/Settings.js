@@ -6,22 +6,35 @@ import Button from '@material-ui/core/Button';
 
 function Settings() {
 
-    const [settings, setSettings] = useState({
-        "vosotros" : "on",
+    const initialSettings = {
+        // "vosotros" : false,
+        // "indicative": false,
+        // "subjunctive": false,
+        // "imperative": false,
+        // "present": false,
+        // "conditional": false,
+        // "conditional-perfect": false
+        // etc...
+    }
+    const [settingsMap, setSettingsMap] = useState(initialSettings)
+    console.table(settingsMap)
 
-    })
-    console.log(settings)
+    const toggleCheckbox = (e) => {
+        // e.preventDefault() // caused issues - why?
+        setSettingsMap({...settingsMap, [e.target.id] : e.target.checked})
+        // if settings value not in object, set to false automatically?
+    }
 
-    // const toggleCheckbox = (e) => {
-    //     e.preventDefault() // unsure if needed
-
-    // }
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.table(settingsMap)
+    }
 
   return (
     <div>
         <h2>Settings</h2>
         <Container maxWidth="sm" className="settings-form">
-            <form>
+            <form onSubmit={handleSubmit}>
                 <Typography component="h3">
                     Latam Spanish or Spain Spanish
                 </Typography>
@@ -30,11 +43,14 @@ function Settings() {
                         <input
                             type='checkbox'
                             id='vosotros'
-                            onChange={event => {
-                                console.log("event target", event.target.value) // "vosotros"
-                                setSettings(event.target.value)
-                            }
-                            }/>
+                            // onChange={event => {
+                            //     console.log("event target: ", event.target) // "vosotros"
+                            //     console.log("event target type: ", event.target.type) // "how to even know about "type???
+                            //     console.log("event target type: ", event.target.checked)
+                            //     setSettingsMap(event.target.value)
+                            // }}/>
+                            onChange={toggleCheckbox}
+                        />
                         Include vosotros
                     </label>
                 </div>
@@ -45,19 +61,25 @@ function Settings() {
                     <label> 
                         <input
                             type='checkbox'
-                            id='indicative'/>
+                            id='indicative'
+                            onChange={toggleCheckbox}
+                            />
                         Indicative
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='subjunctive'/>
+                            id='subjunctive'
+                            onChange={toggleCheckbox}
+                            />
                         Subjunctive
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='imperative'/>
+                            id='imperative'
+                            onChange={toggleCheckbox}
+                            />
                         Imperative
                     </label>
                 </div>
@@ -68,59 +90,77 @@ function Settings() {
                     <label> 
                         <input
                             type='checkbox'
-                            id='present'/>
+                            id='present'
+                            onChange={toggleCheckbox}
+                            />
                         Present
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='imperfect'/>
+                            id='imperfect'
+                            onChange={toggleCheckbox}
+                            />
                         Imperfect
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='conditional'/>
+                            id='conditional'
+                            onChange={toggleCheckbox}
+                            />
                         Conditional
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='future-perfect'/>
+                            id='future-perfect'
+                            onChange={toggleCheckbox}
+                            />
                         Future Perfect
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='conditional-perfect'/>
+                            id='conditional-perfect'
+                            onChange={toggleCheckbox}
+                            />
                         Conditional Perfect
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='preterite'/>
+                            id='preterite'
+                            onChange={toggleCheckbox}
+                            />
                         Preterite
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='future'/>
+                            id='future'
+                            onChange={toggleCheckbox}
+                            />
                         Future
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='present-perfect'/>
+                            id='present-perfect'
+                            onChange={toggleCheckbox}
+                            />
                         Present Perfect
                     </label>
                     <label> 
                         <input
                             type='checkbox'
-                            id='past-perfect'/>
+                            id='past-perfect'
+                            onChange={toggleCheckbox}
+                            />
                         Past Perfect
                     </label>
                 </div>
-                <Button size="medium">Update Settings</Button>
+                <Button size="medium" type="submit">Update Settings</Button>
             </form>
         </Container>
     </div>
