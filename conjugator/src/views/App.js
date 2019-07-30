@@ -1,7 +1,8 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { styled } from '@material-ui/styles';
 import MenuAppBar from './components/MenuAppBar/MenuAppBar'
@@ -20,11 +21,12 @@ function App() {
           <Typography variant="h2" component="h2">
             Welcome to Conjugator!
           </Typography>
-          <Typography component="h3">CTA HERE!</Typography>
-
-          {/* Routes Go Here */}
+          <Typography component="h3">
+            CTA HERE!
+          </Typography>
 
           <Switch>
+            <Route path='/settings' component={Settings} />
             <Route path="/Authentication/" component={Authentication} />
             <Route path="/" exact component={Home} />
           </Switch>

@@ -1,15 +1,13 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { styled } from '@material-ui/styles';
-<<<<<<< HEAD
-import MenuAppBar from './components/MenuAppBar/MenuAppBar';
-=======
 import MenuAppBar from './components/MenuAppBar/MenuAppBar'
 import Settings from './components/Settings/Settings.js';
->>>>>>> origin/lily-zhou
 import './App.scss';
 
 import Home from './pages/Home/Home';
@@ -17,6 +15,7 @@ import Authentication from './pages/Authentication/Authentication';
 function App() {
   return (
     <div className="App">
+      
       <MenuAppBar />
       <div className="app-container-holder">
         <Paper className="app-container">
@@ -25,14 +24,17 @@ function App() {
           </Typography>
           <Typography component="h3">CTA HERE!</Typography>
 
+<<<<<<< HEAD
           {/* Routes Go Here */}
-          {/* Just placeholder settings here for now */}
-          <p></p>
-          <Settings />
 
           <Switch>
             <Route path="/Authentication/" component={Authentication} />
             <Route path="/" exact component={Home} />
+=======
+          <Switch>
+            <Route path='/settings' component={Settings} />
+            {/* <Route component={WelcomePage} /> */}
+>>>>>>> origin/lily-zhou
           </Switch>
         </Paper>
       </div>

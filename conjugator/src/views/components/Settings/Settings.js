@@ -32,7 +32,6 @@ function Settings() {
 
   return (
     <div>
-        <h2>Settings</h2>
         <Container maxWidth="sm" className="settings-form">
             <form onSubmit={handleSubmit}>
                 <Typography component="h3">
@@ -51,7 +50,7 @@ function Settings() {
                             // }}/>
                             onChange={toggleCheckbox}
                         />
-                        Include vosotros
+                        Include "vosotros"
                     </label>
                 </div>
                 <Typography component="h3">
