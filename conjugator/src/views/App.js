@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 
 import { styled } from '@material-ui/styles';
 import MenuAppBar from './components/MenuAppBar/MenuAppBar'
+import Settings from './components/Settings/Settings.js';
 import './App.scss';
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
           </Typography>
 
           {/* Routes Go Here */}
+          {/* Just placeholder settings here for now */}
+          <p></p>
+          <Settings />
 
         </Paper>
       </div>
