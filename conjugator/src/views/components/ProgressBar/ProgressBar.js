@@ -10,15 +10,16 @@ const useStyles = makeStyles({
 
 export default function ProgressBar(props) {
 
+  // console.log("props", typeof props.completed)
+  // console.log("props", props)
+
   const classes = useStyles();
-
-
 
       return (
     <div className={classes.root}>
-      <LinearProgress variant="determinate" value={props.completed} />
+      {/* <LinearProgress variant="determinate" value={props.completed} /> */}
       <br />
-      <LinearProgress color="secondary" variant="determinate" value={props.completed} />
+      <LinearProgress className="progress-bar" color="secondary" variant="determinate" value={props.completed} />
     </div>
   );
 
