@@ -9,7 +9,6 @@ import './App.scss';
 
 import Home from './pages/Home/Home';
 import Authentication from './pages/Authentication/Authentication';
-
 function App() {
   return (
     <div className="App">
@@ -19,18 +18,14 @@ function App() {
           <Typography variant="h2" component="h2">
             Welcome to Conjugator!
           </Typography>
-          <Typography component="h3">
-            CTA HERE!
-            <Home />
-          </Typography>
+          <Typography component="h3">CTA HERE!</Typography>
 
           {/* Routes Go Here */}
 
-            <Switch>
-              <Route path="/" exact component={Home} />
-
-            </Switch>
-
+          <Switch>
+            <Route path="/Authentication/" component={Authentication} />
+            <Route path="/" exact component={Home} />
+          </Switch>
         </Paper>
       </div>
     </div>

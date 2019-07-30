@@ -26,8 +26,7 @@ export default function Home() {
       <Paper>
         <Typography component="h3">Welcome to the Home Page</Typography>
     <div>
-       <Route path="/Authentication/" exact component={Authentication} />
-          <NavLink to="/Authentication/">
+                 <NavLink to="/Authentication/">
             {' '}
             <Button
               variant="contained"
