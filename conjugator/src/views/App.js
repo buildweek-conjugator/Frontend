@@ -4,7 +4,8 @@ import Typography from '@material-ui/core/Typography';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 import { styled } from '@material-ui/styles';
-import MenuAppBar from './components/MenuAppBar/MenuAppBar';
+import MenuAppBar from './components/MenuAppBar/MenuAppBar'
+import Settings from './components/Settings/Settings.js';
 import './App.scss';
 
 import Home from './pages/Home/Home';
@@ -12,6 +13,7 @@ import Authentication from './pages/Authentication/Authentication';
 function App() {
   return (
     <div className="App">
+      
       <MenuAppBar />
       <div className="app-container-holder">
         <Paper className="app-container">
