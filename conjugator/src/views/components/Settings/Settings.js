@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from 'axios';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import Button from '@material-ui/core/Button';
@@ -19,15 +19,22 @@ function Settings() {
     const [settingsMap, setSettingsMap] = useState(initialSettings)
     console.table(settingsMap)
 
+    useEffect( ()=> {
+        axios.get("endpointurl/settings")
+            .then(res => setSettingsMap(/*data*/))
+    },[])
+
     const toggleCheckbox = (e) => {
         // e.preventDefault() // caused issues - why?
         setSettingsMap({...settingsMap, [e.target.id] : e.target.checked})
-        // if settings value not in object, set to false automatically?
     }
 
     const handleSubmit = (e) => {
         e.preventDefault();
         // console.table(settingsMap)
+        axios.put('hi', settingsMap) 
+            .then(/*settings saved!*/)
+            .catch(error => console.log("Error:", error))
     }
 
   return (
@@ -42,14 +49,15 @@ function Settings() {
                         <input
                             type='checkbox'
                             id='vosotros'
-                            // onChange={event => {
-                            //     console.log("event target: ", event.target) // "vosotros"
-                            //     console.log("event target type: ", event.target.type) // "how to even know about "type???
-                            //     console.log("event target type: ", event.target.checked)
-                            //     setSettingsMap(event.target.value)
-                            // }}/>
-                            onChange={toggleCheckbox}
-                        />
+                            onChange={event => {
+                                console.log("event", Object.entries(event.target)) 
+                                // console.log("event target: ", event.target) // "vosotros"
+                                // console.log("event target type: ", event.target.type)
+                                // console.log("event target type: ", event.target.checked)
+                                // setSettingsMap(event.target.value)
+                            }}/>
+                            {/* onChange={toggleCheckbox} */}
+                        
                         Include "vosotros"
                     </label>
                 </div>
