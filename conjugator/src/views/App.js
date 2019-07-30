@@ -1,4 +1,6 @@
 import React from 'react';
+import {Route, Switch} from 'react-router-dom';
+
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 
@@ -21,11 +23,10 @@ function App() {
             CTA HERE!
           </Typography>
 
-          {/* Routes Go Here */}
-          {/* Just placeholder settings here for now */}
-          <p></p>
-          <Settings />
-
+          <Switch>
+            <Route path='/settings' component={Settings} />
+            {/* <Route component={WelcomePage} /> */}
+          </Switch>
         </Paper>
       </div>
     </div>
