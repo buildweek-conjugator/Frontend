@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {NavLink} from 'react-router-dom';
 
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -104,87 +105,96 @@ export default function MenuAppBar() {
   }
 
   return (
-  <div className={classes.root}>
-    <ThemeProvider theme={theme}>
-      <AppBar position="static" theme={theme}>
-        <Toolbar>
-          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
-          {/*   <MenuIcon  */}
-          {/*     onClick={handleMenu}  */}
-          {/*     aria-haspopup="true" */}
-          {/*     open={open} */}
-          {/*     onClose={handleClose} */}
-          {/*   /> */}
-          {/*     <StyledMenu */}
-          {/*     id="customized-menu" */}
-          {/*     anchorEl={anchorEl} */}
-          {/*     keepMounted */}
-          {/*     open={Boolean(anchorEl)} */}
-          {/*     onClose={handleClose} */}
-          {/*     > */}
-          {/*     <StyledMenuItem> */}
-          {/*       <ListItemIcon> */}
-          {/*         <SendIcon /> */}
-          {/*       </ListItemIcon> */}
-          {/*       <ListItemText primary="Sent mail" /> */}
-          {/*     </StyledMenuItem> */}
-          {/*     <StyledMenuItem> */}
-          {/*       <ListItemIcon> */}
-          {/*         <DraftsIcon /> */}
-          {/*       </ListItemIcon> */}
-          {/*       <ListItemText primary="Drafts" /> */}
-          {/*     </StyledMenuItem> */}
-          {/*     <StyledMenuItem> */}
-          {/*       <ListItemIcon> */}
-          {/*         <InboxIcon /> */}
-          {/*       </ListItemIcon> */}
-          {/*       <ListItemText primary="Inbox" /> */}
-          {/*     </StyledMenuItem> */}
-          {/*     </StyledMenu> */}
-          {/*    */}
-          {/* </IconButton> */}
-          <Typography variant="h6" className={classes.title}>
-            Conjugator
-          </Typography>
-          {auth && (
-            <div>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleUserMenu}
-                color="inherit"
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: 'top',
-                  horizontal: 'right',
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>My account</MenuItem>
-              </Menu>
-            </div>
-          )}
-        </Toolbar>
-      </AppBar>
-      <FormGroup>
-        <FormControlLabel
-          control={<Switch checked={auth} onChange={handleChange} aria-label="login switch" />}
-          label={auth ? 'Logout' : 'Login'}
-        />
-      </FormGroup>
+    <div className={classes.root}>
+      <ThemeProvider theme={theme}>
+        <AppBar position="static" theme={theme}>
+          <Toolbar>
+            {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
+            {/*   <MenuIcon  */}
+            {/*     onClick={handleMenu}  */}
+            {/*     aria-haspopup="true" */}
+            {/*     open={open} */}
+            {/*     onClose={handleClose} */}
+            {/*   /> */}
+            {/*     <StyledMenu */}
+            {/*     id="customized-menu" */}
+            {/*     anchorEl={anchorEl} */}
+            {/*     keepMounted */}
+            {/*     open={Boolean(anchorEl)} */}
+            {/*     onClose={handleClose} */}
+            {/*     > */}
+            {/*     <StyledMenuItem> */}
+            {/*       <ListItemIcon> */}
+            {/*         <SendIcon /> */}
+            {/*       </ListItemIcon> */}
+            {/*       <ListItemText primary="Sent mail" /> */}
+            {/*     </StyledMenuItem> */}
+            {/*     <StyledMenuItem> */}
+            {/*       <ListItemIcon> */}
+            {/*         <DraftsIcon /> */}
+            {/*       </ListItemIcon> */}
+            {/*       <ListItemText primary="Drafts" /> */}
+            {/*     </StyledMenuItem> */}
+            {/*     <StyledMenuItem> */}
+            {/*       <ListItemIcon> */}
+            {/*         <InboxIcon /> */}
+            {/*       </ListItemIcon> */}
+            {/*       <ListItemText primary="Inbox" /> */}
+            {/*     </StyledMenuItem> */}
+            {/*     </StyledMenu> */}
+            {/*    */}
+            {/* </IconButton> */}
+            <Typography variant="h6" className={classes.title}>
+              Conjugator
+            </Typography>
+            {auth && (
+              <div>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleUserMenu}
+                  color="inherit"
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: 'top',
+                    horizontal: 'right'
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  <NavLink to="/settings">
+                    {' '}
+                    <MenuItem onClick={handleClose}>Settings</MenuItem>
+                  </NavLink>
+                </Menu>
+              </div>
+            )}
+          </Toolbar>
+        </AppBar>
+        <FormGroup>
+          <FormControlLabel
+            control={
+              <Switch
+                checked={auth}
+                onChange={handleChange}
+                aria-label="login switch"
+              />
+            }
+            label={auth ? 'Logout' : 'Login'}
+          />
+        </FormGroup>
       </ThemeProvider>
     </div>
   );
