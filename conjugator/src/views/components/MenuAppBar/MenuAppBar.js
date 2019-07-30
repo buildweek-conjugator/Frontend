@@ -108,41 +108,41 @@ export default function MenuAppBar() {
     <ThemeProvider theme={theme}>
       <AppBar position="static" theme={theme}>
         <Toolbar>
-          <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-            <MenuIcon 
-              onClick={handleMenu} 
-              aria-haspopup="true"
-              open={open}
-              onClose={handleClose}
-            />
-              <StyledMenu
-              id="customized-menu"
-              anchorEl={anchorEl}
-              keepMounted
-              open={Boolean(anchorEl)}
-              onClose={handleClose}
-              >
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <SendIcon />
-                </ListItemIcon>
-                <ListItemText primary="Sent mail" />
-              </StyledMenuItem>
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <DraftsIcon />
-                </ListItemIcon>
-                <ListItemText primary="Drafts" />
-              </StyledMenuItem>
-              <StyledMenuItem>
-                <ListItemIcon>
-                  <InboxIcon />
-                </ListItemIcon>
-                <ListItemText primary="Inbox" />
-              </StyledMenuItem>
-              </StyledMenu>
-            
-          </IconButton>
+          {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
+          {/*   <MenuIcon  */}
+          {/*     onClick={handleMenu}  */}
+          {/*     aria-haspopup="true" */}
+          {/*     open={open} */}
+          {/*     onClose={handleClose} */}
+          {/*   /> */}
+          {/*     <StyledMenu */}
+          {/*     id="customized-menu" */}
+          {/*     anchorEl={anchorEl} */}
+          {/*     keepMounted */}
+          {/*     open={Boolean(anchorEl)} */}
+          {/*     onClose={handleClose} */}
+          {/*     > */}
+          {/*     <StyledMenuItem> */}
+          {/*       <ListItemIcon> */}
+          {/*         <SendIcon /> */}
+          {/*       </ListItemIcon> */}
+          {/*       <ListItemText primary="Sent mail" /> */}
+          {/*     </StyledMenuItem> */}
+          {/*     <StyledMenuItem> */}
+          {/*       <ListItemIcon> */}
+          {/*         <DraftsIcon /> */}
+          {/*       </ListItemIcon> */}
+          {/*       <ListItemText primary="Drafts" /> */}
+          {/*     </StyledMenuItem> */}
+          {/*     <StyledMenuItem> */}
+          {/*       <ListItemIcon> */}
+          {/*         <InboxIcon /> */}
+          {/*       </ListItemIcon> */}
+          {/*       <ListItemText primary="Inbox" /> */}
+          {/*     </StyledMenuItem> */}
+          {/*     </StyledMenu> */}
+          {/*    */}
+          {/* </IconButton> */}
           <Typography variant="h6" className={classes.title}>
             Conjugator
           </Typography>
