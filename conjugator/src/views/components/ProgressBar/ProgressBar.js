@@ -19,7 +19,7 @@ export default function ProgressBar(props) {
     <div className={classes.root}>
       {/* <LinearProgress variant="determinate" value={props.completed} /> */}
       <br />
-      <LinearProgress className="progress-bar" color="secondary" variant="determinate" value={props.completed} />
+      <LinearProgress className="progress-bar" color="default" variant="determinate" value={props.completed} />
     </div>
   );
 }
