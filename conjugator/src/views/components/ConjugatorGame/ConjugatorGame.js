@@ -40,11 +40,32 @@ const data = {
   translation: 'to place; locate; to be located; be situated',
   value: ''
 };
-
 export default function ConjugatorGame() {
   const classes = useStyles();
   const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(5);
+
+  //random array of numbers to test
+  const [usedWords, setUsedWords] = useState([1, 2, 5, 7, 9]);
+  function getRandomInt(max) {
+    let randoInt = Math.floor(Math.random() * Math.floor(max));
+    console.log(
+      randoInt,
+      ' appears ',
+      usedWords.indexOf(randoInt),
+      ' in the array'
+    );
+    //code to see if number has already been used this session
+    //if it is not in the array (-1) its a good int
+    //otherwise its a bad int and we need to get a new number
+    if (usedWords.indexOf(randoInt) === -1) {
+      console.log('good int');
+      return randoInt;
+    } else {
+      console.log('bad int');
+      return getRandomInt(max);
+    }
+  }
 
   // let verb_xyz = "";
 
@@ -52,6 +73,9 @@ export default function ConjugatorGame() {
     // console.log('Event verb', event.target.value);
     // console.log("event target", event.target.value)
     // let verb_xyz = event.target.value;
+    let textField = document.getElementById('outlined-name');
+    textField.style = 'background:white;';
+
     setVerb({ ...verb, [event.target.name]: event.target.value });
   };
 
@@ -61,16 +85,23 @@ export default function ConjugatorGame() {
   // step3 posts request to check if answer is correct.
   function handleSubmit(event) {
     event.preventDefault();
-    // axios.get('somerUrl', verb);
     // console.log("verb_xyz", verb_xyz)
     // console.log(event.target) // should be whole form
 
     let verb_value = document.getElementById('outlined-name');
-
+    console.log(verb.value);
+    console.log(verb.answer);
     // console.log("verb answer", verb.answer)
     //update progress bar
-    if (verb_value.value === verb.answer) {
+    if (verb.value === verb.answer) {
       setCompleted(completed + 10);
+
+      verb_value.style = 'background:lightgreen;';
+
+      // setTimeout(function(){randomAxios()}, 2000)
+    } else {
+      console.log('wrong');
+      verb_value.style = 'background:red;';
     }
   }
   // step4 if then statement if correct moves to next question,else red box of saddness.
@@ -82,6 +113,8 @@ export default function ConjugatorGame() {
         <p>{verb.infinitive}</p>
         <Typography component="h2">Tense: </Typography>
         <p>{verb.tense}</p>
+        <Typography component="h2">English Translation: </Typography>
+        <p>{verb.translation}</p>
 
         <form
           className={classes.container}
