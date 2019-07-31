@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -11,8 +11,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 
 import ProgressBar from '../ProgressBar/ProgressBar';
-
-
 
 const useStyles = makeStyles(theme => ({
   container: {
@@ -32,29 +30,29 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const data = {
-  "answer": "ubicaren",
-  "performer": "ellos/ellas/ustedes",
-  "mood": "Subjunctive",
-  "infinitive": "ubicar",
-  "performer_en": "them / you all (formal)",
-  "tense": "Future",
-  "has_long": false,
-  "translation": "to place; locate; to be located; be situated",
-  "value": null
-}
+  answer: 'ubicaren',
+  performer: 'ellos/ellas/ustedes',
+  mood: 'Subjunctive',
+  infinitive: 'ubicar',
+  performer_en: 'them / you all (formal)',
+  tense: 'Future',
+  has_long: false,
+  translation: 'to place; locate; to be located; be situated',
+  value: ''
+};
 
 export default function ConjugatorGame() {
   const classes = useStyles();
   const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(5);
 
-  let verb_xyz = "";
+  // let verb_xyz = "";
 
   const handleChange = event => {
     // console.log('Event verb', event.target.value);
     // console.log("event target", event.target.value)
-    let verb_xyz = event.target.value;
-    setVerb({...verb, [event.target.name] : event.target.value});
+    // let verb_xyz = event.target.value;
+    setVerb({ ...verb, [event.target.name]: event.target.value });
   };
 
   // axios request to get relevant user settings.
@@ -67,12 +65,12 @@ export default function ConjugatorGame() {
     // console.log("verb_xyz", verb_xyz)
     // console.log(event.target) // should be whole form
 
-    let verb_value = document.getElementById("outlined-name")
+    let verb_value = document.getElementById('outlined-name');
 
     // console.log("verb answer", verb.answer)
     //update progress bar
-    if (verb_value.value === verb.answer) { 
-      setCompleted(completed+10)
+    if (verb_value.value === verb.answer) {
+      setCompleted(completed + 10);
     }
   }
   // step4 if then statement if correct moves to next question,else red box of saddness.
@@ -94,7 +92,7 @@ export default function ConjugatorGame() {
           <TextField
             id="outlined-name"
             label="Verb"
-            name="verb"
+            name="value"
             onChange={handleChange}
             placeholder="Enter your conjugation"
             value={verb.value}
@@ -110,8 +108,8 @@ export default function ConjugatorGame() {
           >
             Submit Answer.
           </Button>
-    </form>
-    <ProgressBar completed={completed}/>
+        </form>
+        <ProgressBar completed={completed} />
       </Paper>
     </div>
   );
