@@ -21,7 +21,8 @@ const initialState = {
   dailyGoal: 0,
   dailyProgress: 0,
   postingGoal: false,
-  postGoalError: ''
+  postGoalError: '',
+  messsage: ''
 };
 
 const reducer = (state = initialState, action) => {
@@ -39,7 +40,8 @@ const reducer = (state = initialState, action) => {
         ...state,
         loggingIn: false,
         token: action.payload.token,
-        username: action.payload.username
+        username: action.payload.username,
+        message: action.payload.message
       };
     case actions.LOGIN_FAILURE:
       return {
