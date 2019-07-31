@@ -5,7 +5,7 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
-  },
+  }
 });
 
 export default function ProgressBar(props) {
@@ -22,6 +22,4 @@ export default function ProgressBar(props) {
       <LinearProgress className="progress-bar" color="secondary" variant="determinate" value={props.completed} />
     </div>
   );
-
-
-    }
+}

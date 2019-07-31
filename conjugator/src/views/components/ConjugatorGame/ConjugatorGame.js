@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
+// import { Alert } from 'reactstrap';
 
 import Paper from "@material-ui/core/Paper";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -11,6 +12,23 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
+
+const useStyles = makeStyles(theme => ({
+  container: {
+    display: "flex",
+    flexWrap: "wrap"
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1)
+  },
+  dense: {
+    marginTop: theme.spacing(2)
+  },
+  menu: {
+    width: 200
+  }
+}));
 
 const data = {
   answer: "ubicaren",
@@ -65,16 +83,15 @@ export default function ConjugatorGame() {
   function handleSubmit(event) {
     event.preventDefault();
     // console.log("event.target.value", event.target.value)
-
-    let verb_value = document.getElementById("outlined-name");
+    const targetInput = event.target.value;
 
     if (verb.value === verb.answer) {
       setCompleted(completed + 10);
-      verb_value.style = "background:lightgreen;";
+      targetInput.style = "background:#D9EFDE;";
 
       // setTimeout(function(){randomAxios()}, 2000)
     } else {
-      verb_value.style = "background:red;";
+      targetInput.style = "background:#F8D7DA;";
     }
   }
   // step4 if then statement if correct moves to next question,else red box of saddness.
@@ -87,16 +104,17 @@ export default function ConjugatorGame() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
+        <div className="tense-mood-container">
+          <span>{verb.tense} tense</span>
+          <span>{verb.mood} mood</span>
+        </div>
         <div className="verb-translation-container">
           <span className="verb">{verb.infinitive.toUpperCase()}</span>
           <span className="translation">{verb.translation}</span>
         </div>
 
-        <span>{verb.tense} tense</span>
-
-        <div className="subject">
-          <span>{verb.performer}</span>
-          {/* <span>    _____________________</span> */}
+        <div className="subject-input-container">
+          <span id="subject">{verb.performer}</span>
 
           <TextField
             id="outlined-name"
@@ -117,8 +135,8 @@ export default function ConjugatorGame() {
         >
           Submit Answer
         </Button>
+        <ProgressBar className="progress-bar" completed={completed} />
       </form>
-      <ProgressBar completed={completed} />
     </Paper>
   );
 }

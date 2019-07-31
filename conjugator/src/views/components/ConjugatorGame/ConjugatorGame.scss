@@ -6,28 +6,64 @@
     align-items: center;
     text-align: center;
 
-    .verb-translation-container {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
+    .form-container {
+        width: 90%;
 
-        .verb {
-            font-size: 2rem;
+        .tense-mood-container {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px auto;
+            color: grey;
+        }
+
+        .verb-translation-container {
             margin: 10px auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+    
+            .verb {
+                font-size: 2rem;
+            }
+    
+            .translation {
+                font-style: italic;
+            }
         }
-
-        .translation {
-            margin-left: 15px;
-            font-style: italic;
+    
+        .subject-input-container {
+            margin: 10px auto;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            color: grey;
+    
+            #subject {
+                margin-right: 10px;
+            }
+    
+            #outlined-name {
+                width: 220px;
+            }
+        }
+    
+        .submit-button {
+            background-color: #F2C84B;
+            width: 30%;
+    
+            &:hover{
+                background-color: darken(#F2C84B, 15%);
+            }
+        }
+    
+        .progress-bar {
+            // background: url(spanish-flag.jpg);
+            height: 30px;
+            object-fit: cover;
+            border-radius: 5px;
+            // background-color: #F2C84B;
         }
     }
-
-    #outlined-name {
-        width: 200px;
-    }
-
-    .submit-button {
-        // width: 60px;
-    }
-
 }
