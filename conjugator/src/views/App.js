@@ -11,6 +11,7 @@ import './App.scss';
 
 import Home from './pages/Home/Home';
 import Authentication from './pages/Authentication/Authentication';
+import UserDashboard from './pages/UserDashboard/UserDashboard';
 import ConjugatorGame from './components/ConjugatorGame/ConjugatorGame';
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
             <Route path="/settings" component={Settings} />
             <Route path="/Authentication/" component={Authentication} />
             <Route path="/game/" component={ConjugatorGame} />
+            <Route path="/dashboard/" component={UserDashboard} />
             <Route path="/" exact component={Home} />
           </Switch>
         </Paper>
