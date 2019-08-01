@@ -113,6 +113,7 @@ function SignUp(props) {
               id="firstName"
               label="First Name"
               autoFocus
+              value={user.value}
               onChange={handleInputChange}
             />
           </Grid>
@@ -195,4 +196,3 @@ function SignUp(props) {
   );
 }
 export default SignUp;
-
