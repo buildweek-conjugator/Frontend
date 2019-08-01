@@ -148,6 +148,10 @@ export default function MenuAppBar() {
                     {' '}
                     <MenuItem onClick={handleClose}>Game</MenuItem>
                   </NavLink>
+                  <NavLink className="dropButton" to="/">
+                    {' '}
+                    <MenuItem onClick={handleClose}>Login</MenuItem>
+                  </NavLink>
                 </Menu>
               </div>
             )}
