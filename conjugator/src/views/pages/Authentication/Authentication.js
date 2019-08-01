@@ -168,6 +168,7 @@ function SignUp(props) {
           </Grid>
           <Button
             type="submit"
+            id='user-action-btn'
             variant="contained"
             color="primary"
             className={classes.submit}
