@@ -19,10 +19,8 @@ function App() {
       <MenuAppBar />
       <div className="app-container-holder">
         <Paper className="app-container">
-          <Typography variant="h2" component="h2">
-            Welcome to Conjugator!
-          </Typography>
-          <Typography component="h3">CTA HERE!</Typography>
+          {/* <Typography variant="h2" component="h2">Welcome to Conjugator!</Typography> */}
+          {/* <Typography component="h3">CTA HERE!</Typography> */}
 
           <Switch>
             <Route path="/settings" component={Settings} />
