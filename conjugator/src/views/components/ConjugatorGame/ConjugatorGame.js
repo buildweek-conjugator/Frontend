@@ -100,6 +100,7 @@ export default function ConjugatorGame() {
 
 
   function getRandomInt(max) {
+
     return Math.floor(Math.random() * Math.floor(max))
     // console.log(
     //   randoInt,
@@ -115,7 +116,7 @@ export default function ConjugatorGame() {
     //   return randoInt;
     // } else {
     //   console.log("bad int");
-      // return getRandomInt(max);
+    //   return getRandomInt(max);
     // }
   }
 
