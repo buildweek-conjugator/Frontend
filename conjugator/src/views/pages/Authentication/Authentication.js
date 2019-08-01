@@ -10,7 +10,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import Axios from 'axios';
+
 
 import { login } from '../../../state/actions';
 import './Authentication.scss';
@@ -67,10 +67,6 @@ function SignUp(props) {
         }
       });
     }
-    // Axios.post('someUrl/signup',user)
-    //   .then(response => /*data*/
-    //     localStorage.setItem ('token', response.data.token)
-    //   )
   }
   const [user, setUser] = useState(initialFormState);
 
@@ -98,12 +94,26 @@ function SignUp(props) {
       setUser(updatedForm);
     }
   };
-
-  class FormSignUp extends React.Component {
-    render() {
-      return (
-        <>
-          <Grid item xs={12} sm={6}>
+  return (
+    <Container id='user-action-form' component="main" maxWidth="s">
+      <CssBaseline />
+      <div className={classes.paper}>
+        <Avatar className={classes.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5" id="header-text">
+          {/* Form Toggle Logic -- Same logic for the button and toggle link */}
+          {user.headerText}
+        </Typography>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
+          <Grid container spacing={2}>
+            {/* Render the 2 fields in FormSignUp if action = signup */}
+            {/* {user.action === 'signup' ? <FormSignUp /> : null} */}
+            {user.action === 'login' ? (
+              <div id='placeholder'></div>
+            ) : (
+          <>
+            <Grid item xs={12} sm={6}>
             <TextField
               autoComplete="fname"
               name="firstName"
@@ -112,7 +122,7 @@ function SignUp(props) {
               fullWidth
               id="firstName"
               label="First Name"
-              autoFocus
+              value={setUser.firstName}
               onChange={handleInputChange}
             />
           </Grid>
@@ -129,24 +139,7 @@ function SignUp(props) {
             />
           </Grid>
         </>
-      );
-    }
-  }
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5" id="header-text">
-          {/* Form Toggle Logic -- Same logic for the button and toggle link */}
-          {user.headerText}
-        </Typography>
-        <form className={classes.form} noValidate onSubmit={handleSubmit}>
-          <Grid container spacing={2}>
-            {/* Render the 2 fields in FormSignUp if action = signup */}
-            {user.action === 'signup' ? <FormSignUp /> : null}
+          )}
             <Grid item xs={12}>
               <TextField
                 variant="outlined"
@@ -175,7 +168,7 @@ function SignUp(props) {
           </Grid>
           <Button
             type="submit"
-            fullWidth
+            id='user-action-btn'
             variant="contained"
             color="primary"
             className={classes.submit}
@@ -184,7 +177,7 @@ function SignUp(props) {
           </Button>
           <Grid container justify="flex-end">
             <Grid item>
-              <Link href="#" variant="body2" onClick={toggleForm}>
+              <Link href="#" id='alt-action' variant="span" onClick={toggleForm}>
                 {user.altAction}
               </Link>
             </Grid>
@@ -195,4 +188,3 @@ function SignUp(props) {
   );
 }
 export default SignUp;
-

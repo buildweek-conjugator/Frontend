@@ -1,6 +1,7 @@
 .panelCon{
   display:flex;
   flex-direction:column;
+  margin-top: 10px;
 }
 
 .dashBoard {
@@ -13,6 +14,24 @@
 .yourProfile{
   text-align:center;
   font-Size: 2rem;
+
+
+}
+.chartCon{
+  display:flex;
+  justify-content: center;
+  width: 90%;
+
+
+
+
+
+
+}
+.lineChart{
+  width:90% ;
+  height:100px ;
+
 
 
 }
