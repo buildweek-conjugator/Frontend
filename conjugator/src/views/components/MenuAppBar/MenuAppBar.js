@@ -23,6 +23,8 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 
+import './MenuAppBar.scss';
+
 
 const useStyles = makeStyles(theme => ({
   root: {

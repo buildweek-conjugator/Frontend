@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link, NavLink } from 'react-router-dom';
 
-
 import Paper from '@material-ui/core/Paper';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/Button';
 
 import './Home.scss';
-
+import architecture from'./architecture-building-city-1703311.jpg';
 
 const useStyles = makeStyles(theme => ({
   button: {
@@ -16,6 +15,9 @@ const useStyles = makeStyles(theme => ({
   },
   input: {
     display: 'none'
+  },
+  typography: {
+    width: '20%'
   }
 }));
 
@@ -24,36 +26,27 @@ export default function Home() {
 
   return (
     <div className="app-container-holder">
-      <Paper>
-    <Typography component="h3">Welcome to the Home Page</Typography>
+      <Paper className="homepage-container">
+        <h3>Are you ready to play!</h3>
     <div>
-    <p>PLace Holder Text PLace Holder TextPLace Holder TextPLace Holder TextPLace Holder TextPLace Holder TextPLace Holder Text</p>
-    </div>
+    <img src= {architecture} alt="Oops"/>
+          <p>
+            Click the link below to begin you jounery to become more proficient
+            in Spanish
+          </p>
+        </div>
 
-    <div>
-                 <NavLink to="/Authentication/">
+        <div>
+          <NavLink to="/Authentication/">
             {' '}
             <Button
               variant="contained"
               color="primary"
               className={classes.button}
             >
-              Play
+              Register
             </Button>
-    </NavLink>
-  <NavLink to="/game/">
-            {' '}
-            <Button
-              variant="contained"
-              color="primary"
-              className={classes.button}
-            >
-              Game
-            </Button>
-    </NavLink>
-
-
-
+          </NavLink>
         </div>
       </Paper>
     </div>
