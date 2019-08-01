@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import {NavLink} from 'react-router-dom';
-
+import React, { useState, useEffect } from 'react';
+import { NavLink } from 'react-router-dom';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
@@ -23,43 +22,44 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import DraftsIcon from '@material-ui/icons/Drafts';
 import SendIcon from '@material-ui/icons/Send';
 
+import './MenuAppBar.scss';
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
-    width: "100%"
+    width: '100%'
   },
   menuButton: {
-    marginRight: theme.spacing(2),
+    marginRight: theme.spacing(2)
   },
   title: {
-    flexGrow: 1,
-  },
+    flexGrow: 1
+  }
 }));
 
 const theme = createMuiTheme({
   palette: {
     primary: {
-      main: '#AA151B',
+      main: '#F2C84B'
     }
   }
 });
 
 const StyledMenu = withStyles({
   paper: {
-    border: '1px solid #d3d4d5',
-  },
+    border: '1px solid #d3d4d5'
+  }
 })(props => (
   <Menu
     elevation={0}
     getContentAnchorEl={null}
     anchorOrigin={{
       vertical: 'bottom',
-      horizontal: 'center',
+      horizontal: 'center'
     }}
     transformOrigin={{
       vertical: 'top',
-      horizontal: 'center',
+      horizontal: 'center'
     }}
     {...props}
   />
@@ -70,10 +70,10 @@ const StyledMenuItem = withStyles(theme => ({
     '&:focus': {
       backgroundColor: theme.palette.primary.main,
       '& .MuiListItemIcon-root, & .MuiListItemText-primary': {
-        color: theme.palette.common.white,
-      },
-    },
-  },
+        color: theme.palette.common.white
+      }
+    }
+  }
 }))(MenuItem);
 
 export default function MenuAppBar() {
@@ -83,8 +83,7 @@ export default function MenuAppBar() {
   const user_open = Boolean(anchorEl);
   const open = Boolean(anchorEl);
   const main_open = Boolean(anchorEl);
-  const [menuState , setMenuState] = useState(false);
-
+  const [menuState, setMenuState] = useState(false);
 
   function handleChange(event) {
     setAuth(event.target.checked);
@@ -92,12 +91,12 @@ export default function MenuAppBar() {
 
   function handleUserMenu(event) {
     setAnchorEl(event.currentTarget);
-    console.log(event.currentTarget)
+    console.log(event.currentTarget);
   }
 
   function handleMenu(event) {
     setMenuState(!menuState);
-    console.log(event.currentTarget)
+    console.log(event.currentTarget);
   }
 
   function handleClose() {
@@ -109,41 +108,6 @@ export default function MenuAppBar() {
       <ThemeProvider theme={theme}>
         <AppBar position="static" theme={theme}>
           <Toolbar>
-            {/* <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"> */}
-            {/*   <MenuIcon  */}
-            {/*     onClick={handleMenu}  */}
-            {/*     aria-haspopup="true" */}
-            {/*     open={open} */}
-            {/*     onClose={handleClose} */}
-            {/*   /> */}
-            {/*     <StyledMenu */}
-            {/*     id="customized-menu" */}
-            {/*     anchorEl={anchorEl} */}
-            {/*     keepMounted */}
-            {/*     open={Boolean(anchorEl)} */}
-            {/*     onClose={handleClose} */}
-            {/*     > */}
-            {/*     <StyledMenuItem> */}
-            {/*       <ListItemIcon> */}
-            {/*         <SendIcon /> */}
-            {/*       </ListItemIcon> */}
-            {/*       <ListItemText primary="Sent mail" /> */}
-            {/*     </StyledMenuItem> */}
-            {/*     <StyledMenuItem> */}
-            {/*       <ListItemIcon> */}
-            {/*         <DraftsIcon /> */}
-            {/*       </ListItemIcon> */}
-            {/*       <ListItemText primary="Drafts" /> */}
-            {/*     </StyledMenuItem> */}
-            {/*     <StyledMenuItem> */}
-            {/*       <ListItemIcon> */}
-            {/*         <InboxIcon /> */}
-            {/*       </ListItemIcon> */}
-            {/*       <ListItemText primary="Inbox" /> */}
-            {/*     </StyledMenuItem> */}
-            {/*     </StyledMenu> */}
-            {/*    */}
-            {/* </IconButton> */}
             <Typography variant="h6" className={classes.title}>
               Conjugator
             </Typography>
@@ -173,10 +137,16 @@ export default function MenuAppBar() {
                   open={open}
                   onClose={handleClose}
                 >
-                  <MenuItem onClick={handleClose}>Profile</MenuItem>
-                  <NavLink to="/settings">
+                  <NavLink className="dropButton" to="/dashboard">
+                    <MenuItem onClick={handleClose}>Profile</MenuItem>
+                  </NavLink>
+                  <NavLink className="dropButton" to="/settings">
                     {' '}
                     <MenuItem onClick={handleClose}>Settings</MenuItem>
+                  </NavLink>
+                  <NavLink className="dropButton" to="/game">
+                    {' '}
+                    <MenuItem onClick={handleClose}>Game</MenuItem>
                   </NavLink>
                 </Menu>
               </div>
