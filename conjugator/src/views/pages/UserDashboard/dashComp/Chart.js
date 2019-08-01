@@ -9,6 +9,7 @@ import {
   Tooltip
 } from 'recharts';
 import Title from './Title';
+import './DashBoard.scss';
 
 // Generate Sales Data
 function createData(date, amount) {
@@ -31,10 +32,10 @@ export default function Chart() {
   return (
     <React.Fragment>
       <Title>Your progress!</Title>
-      <div>
-        <LineChart
-          width={600}
-          height={300}
+      <div className= "chartCon">
+        <LineChart className = "lineChart"
+          width={700}
+          height={350}
           data={data}
           margin={{
             top: 16,
@@ -44,10 +45,6 @@ export default function Chart() {
           }}
         >
           <XAxis dataKey="date" />
-          <Label angle={0} position="bottom" style={{ textAnchor: 'middle' }}>
-            Conjugator Score
-          </Label>
-
           <YAxis>
             <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
               Conjugator Score
