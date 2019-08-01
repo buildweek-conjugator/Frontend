@@ -33,7 +33,7 @@ const data = {
 export default function ConjugatorGame() {
   const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(0);
-  const [answer, setAnswer] = useState(null)
+  const [answer, setAnswer] = useState(null);
 
   //random array of numbers to test
   const [usedWords, setUsedWords] = useState([1, 2, 5, 7, 9]);
@@ -99,16 +99,15 @@ export default function ConjugatorGame() {
 
   const skipVerb = () => {
     // api call for new word
-  }
+  };
 
   const toggleAnswer = () => {
     if (answer === null) {
-      setAnswer(data.answer)
+      setAnswer(data.answer);
     } else {
-      setAnswer(null)
+      setAnswer(null);
     }
-    
-  }
+  };
 
   return (
     <Paper className="game-container">
@@ -142,27 +141,15 @@ export default function ConjugatorGame() {
         <div className="subject-input-container">
           <span id="subject">{verb.performer}</span>
 
-          { answer ? 
-              <TextField
-                id="outlined-name"
-                name="value"
-                onChange={handleChange}
-                placeholder={data.answer}
-                value={verb.value}
-                margin="normal"
-                variant="outlined" 
-              /> 
-            :
-              <TextField
-                id="outlined-name"
-                name="value"
-                onChange={handleChange}
-                placeholder="enter conjugated verb"
-                value={verb.value}
-                margin="normal"
-                variant="outlined" 
-              />
-          }
+          <TextField
+            id="outlined-name"
+            name="value"
+            onChange={handleChange}
+            placeholder={answer ? `${data.answer}` : `Enter your conjugation`}
+            value={verb.value}
+            margin="normal"
+            variant="outlined"
+          />
 
           <Button
             type="submit"
@@ -172,24 +159,21 @@ export default function ConjugatorGame() {
           >
             Submit
           </Button>
-          
         </div>
 
         <Grid item>
-            <ButtonGroup
-              variant="contained"
-              size="small"
-              aria-label="small contained button group"
-            >
-              <Button
-                onClick={skipVerb}
-                >Skip</Button>
-              <Button
-                onClick={toggleAnswer}
-                >{answer ? `Hide Answer` : `Show Answer`}</Button>
-            </ButtonGroup>
-          </Grid>
-          {/* {answer && <p>{data.answer}</p>} */}
+          <ButtonGroup
+            variant="contained"
+            size="small"
+            aria-label="small contained button group"
+          >
+            <Button onClick={skipVerb}>Skip</Button>
+            <Button onClick={toggleAnswer}>
+              {answer ? `Hide Answer` : `Show Answer`}
+            </Button>
+          </ButtonGroup>
+        </Grid>
+        {/* {answer && <p>{data.answer}</p>} */}
         <ProgressBar className="progress-bar" completed={completed} />
       </form>
     </Paper>
