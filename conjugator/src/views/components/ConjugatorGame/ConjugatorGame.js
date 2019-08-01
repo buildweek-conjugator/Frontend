@@ -75,23 +75,25 @@ export default function ConjugatorGame() {
   const [usedWords, setUsedWords] = useState([1, 2, 5, 7, 9]);
 
   function getRandomInt(max) {
-    let randoInt = Math.floor(Math.random() * Math.floor(max));
-    console.log(
-      randoInt,
-      " appears ",
-      usedWords.indexOf(randoInt),
-      " in the array"
-    );
-    //code to see if number has already been used this session
-    //if it is not in the array (-1) its a good int
-    //otherwise its a bad int and we need to get a new number
-    if (usedWords.indexOf(randoInt) === -1) {
-      console.log("good int");
-      return randoInt;
-    } else {
-      console.log("bad int");
-      return getRandomInt(max);
-    }
+
+    return Math.floor(Math.random() * Math.floor(max));
+    // let randoInt = Math.floor(Math.random() * Math.floor(max));
+    // console.log(
+    //   randoInt,
+    //   " appears ",
+    //   usedWords.indexOf(randoInt),
+    //   " in the array"
+    // );
+    // //code to see if number has already been used this session
+    // //if it is not in the array (-1) its a good int
+    // //otherwise its a bad int and we need to get a new number
+    // if (usedWords.indexOf(randoInt) === -1) {
+    //   console.log("good int");
+    //   return randoInt;
+    // } else {
+    //   console.log("bad int");
+    //   return getRandomInt(max);
+    // }
   }
 
   const handleChange = event => {
