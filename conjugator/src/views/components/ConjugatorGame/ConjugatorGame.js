@@ -142,14 +142,27 @@ export default function ConjugatorGame() {
         <div className="subject-input-container">
           <span id="subject">{verb.performer}</span>
 
-          <TextField
-            id="outlined-name"
-            name="value"
-            onChange={handleChange}
-            placeholder="enter conjugated verb"
-            value={verb.value}
-            margin="normal"
-            variant="outlined" /> 
+          { answer ? 
+              <TextField
+                id="outlined-name"
+                name="value"
+                onChange={handleChange}
+                placeholder={data.answer}
+                value={verb.value}
+                margin="normal"
+                variant="outlined" 
+              /> 
+            :
+              <TextField
+                id="outlined-name"
+                name="value"
+                onChange={handleChange}
+                placeholder="enter conjugated verb"
+                value={verb.value}
+                margin="normal"
+                variant="outlined" 
+              />
+          }
 
           <Button
             type="submit"
@@ -176,7 +189,7 @@ export default function ConjugatorGame() {
                 >{answer ? `Hide Answer` : `Show Answer`}</Button>
             </ButtonGroup>
           </Grid>
-          {answer && <p>{data.answer}</p>}
+          {/* {answer && <p>{data.answer}</p>} */}
         <ProgressBar className="progress-bar" completed={completed} />
       </form>
     </Paper>
