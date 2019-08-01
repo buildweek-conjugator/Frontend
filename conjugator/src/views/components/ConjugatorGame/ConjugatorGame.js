@@ -100,8 +100,8 @@ export default function ConjugatorGame() {
 
 
   function getRandomInt(max) {
-
-    return Math.floor(Math.random() * Math.floor(max))
+    return Math.floor(Math.random() * Math.floor(max));
+    // let randoInt = Math.floor(Math.random() * Math.floor(max));
     // console.log(
     //   randoInt,
     //   " appears ",
@@ -116,8 +116,6 @@ export default function ConjugatorGame() {
     //   return randoInt;
     // } else {
     //   console.log("bad int");
-    //   return getRandomInt(max);
-    // }
   }
 
   const handleChange = event => {
