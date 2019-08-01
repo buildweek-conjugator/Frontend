@@ -13,7 +13,20 @@ import Chip from "@material-ui/core/Chip";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const data = [{
+
+const data = {
+  answer: "ubicaren",
+  performer: "ellos/ellas/ustedes",
+  mood: "Subjunctive",
+  infinitive: "ubicar",
+  performer_en: "them / you all (formal)",
+  tense: "Future",
+  has_long: false,
+  translation: "to place; locate; to be located; be situated",
+  value: ""
+}
+
+const dataArr = [{
   answer: "ubicaren",
   performer: "ellos/ellas/ustedes",
   mood: "Subjunctive",
@@ -53,9 +66,9 @@ const data = [{
 // step4: axios.post - posts request to check if answer is correct
 
 export default function ConjugatorGame() {
-  // const [verb, setVerb] = useState(data);
+  const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(0);
-  const [verb, setVerb] = useState(data[completed]);
+  // const [verb, setVerb] = useState(dataArr[completed]);
   const [answer, setAnswer] = useState(null);
 
   //random array of numbers to test
@@ -99,7 +112,7 @@ export default function ConjugatorGame() {
       
       // placeholder to demo app until api is connected
       
-      setVerb(data[completed+1])
+      setVerb(dataArr[completed+1])
       
       // setTimeout(function(){randomAxios()}, 2000)
     } else {
@@ -126,10 +139,11 @@ export default function ConjugatorGame() {
 
   const skipVerb = () => {
     // api call for new word
-    setVerb(data[completed+1])
+    setVerb(dataArr[completed+1])
   };
 
   const toggleAnswer = () => {
+    console.log(answer)
     if (answer === null) {
       setAnswer(data.answer);
     } else {
