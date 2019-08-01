@@ -19,10 +19,10 @@ function App() {
       <MenuAppBar />
       <div className="app-container-holder">
         <Paper className="app-container">
-          <Typography className="header" variant="h2" component="h2">
+          <Typography variant="h2" component="h2">
             Conjugator
           </Typography>
-          {/* <Typography component="h3">CTA HERE!</Typography> */}
+     
 
           <Switch>
             <Route path="/settings" component={Settings} />
@@ -30,7 +30,7 @@ function App() {
             <Route path="/game/" component={ConjugatorGame} />
             <Route path="/dashboard/" component={UserDashboard} />
             {/* <Route path="/" exact component={Home} /> */}
-            <Route path="/" component={Authentication} />
+            <Route path="/" exact component={Authentication} />
           </Switch>
         </Paper>
       </div>
