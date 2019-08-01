@@ -1,37 +1,19 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
-// import { Alert } from 'reactstrap';
 
 import Paper from "@material-ui/core/Paper";
-import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import clsx from "clsx";
-import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
+import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import ButtonGroup from "@material-ui/core/ButtonGroup";
 import Chip from "@material-ui/core/Chip";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const useStyles = makeStyles(theme => ({
-  container: {
-    display: "flex",
-    flexWrap: "wrap"
-  },
-  textField: {
-    marginLeft: theme.spacing(1),
-    marginRight: theme.spacing(1)
-  },
-  dense: {
-    marginTop: theme.spacing(2)
-  },
-  menu: {
-    width: 200
-  }
-}));
-
-const data = {
+const data = [{
   answer: "ubicaren",
   performer: "ellos/ellas/ustedes",
   mood: "Subjunctive",
@@ -40,21 +22,45 @@ const data = {
   tense: "Future",
   has_long: false,
   translation: "to place; locate; to be located; be situated",
-};
+  value: ""
+},
+{
+  answer: "llamo",
+  performer: "yo",
+  mood: "Subjunctive",
+  infinitive: "llamar",
+  performer_en: "them / you all (formal)",
+  tense: "Present",
+  has_long: false,
+  translation: "to call",
+  value: ""
+},
+{
+  answer: "tañed",
+  performer: "ella",
+  mood: "Imperative Affirmative",
+  infinitive: "tañer",
+  performer_en: "them / you all",
+  tense: "Present",
+  has_long: false,
+  translation: "to play",
+  value: ""
+}];
 
-// axios request to get relevant user settings.
-// step1 retrieve random unconjugated verb and tense and from data base
-// step2 user inputs response
-// step3 posts request to check if answer is correct.
+// step1: axios.get - get relevant user settings for which verb forms to show
+// step2: axios.get - retrieve random unconjugated verb and tense and from data base
+// step3: user inputs conjugated verb
+// step4: axios.post - posts request to check if answer is correct
 
 export default function ConjugatorGame() {
-  const classes = useStyles();
-  const [verb, setVerb] = useState(data);
+  // const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(0);
-  // const [input, setInput] = useState({value: ""});
+  const [verb, setVerb] = useState(data[completed]);
+  const [answer, setAnswer] = useState(null);
 
   //random array of numbers to test
   const [usedWords, setUsedWords] = useState([1, 2, 5, 7, 9]);
+
   function getRandomInt(max) {
     let randoInt = Math.floor(Math.random() * Math.floor(max));
     console.log(
@@ -87,10 +93,14 @@ export default function ConjugatorGame() {
     // console.log("event.target.value", event.target.value)
     const targetInput = event.target.value;
 
-    if (verb.value === verb.answer) {
-      setCompleted(completed + 10);
+    if (verb.value.toLowerCase() === verb.answer) {
+      setCompleted(completed + 1);
       targetInput.style = "background:#D9EFDE;";
-
+      
+      // placeholder to demo app until api is connected
+      
+      setVerb(data[completed+1])
+      
       // setTimeout(function(){randomAxios()}, 2000)
     } else {
       targetInput.style = "background:#F8D7DA;";
@@ -99,7 +109,7 @@ export default function ConjugatorGame() {
         targetInput.style = "background:white;";
       }, 2000);
     }
-  }
+  };
 
   const [chipData, setChipData] = useState([
     { key: 0, label: "á" },
@@ -111,10 +121,29 @@ export default function ConjugatorGame() {
   ]);
 
   const handleClick = chipClicked => () => {
-      setVerb({...verb, value: verb.value + `${chipClicked.label}`})
-      
-      // setVerb({...input, value: input.value + `${chipClicked.label}`})
-      // console.log(input)
+    setVerb({ ...verb, value: verb.value + `${chipClicked.label}` });
+  };
+
+  const skipVerb = () => {
+    // api call for new word
+    setVerb(data[completed+1])
+  };
+
+  const toggleAnswer = () => {
+    if (answer === null) {
+      setAnswer(data.answer);
+    } else {
+      setAnswer(null);
+    }
+  };
+
+  const [buttonText, setButtonText] = useState(false)
+  const hoverOn = () => {
+    setButtonText(true)
+  };
+
+  const hoverOff = () => {
+    setButtonText(false)
   };
 
   return (
@@ -125,6 +154,7 @@ export default function ConjugatorGame() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
+
         <div className="tense-mood-container">
           <span>{verb.tense} tense</span>
           <span>{verb.mood} mood</span>
@@ -134,6 +164,18 @@ export default function ConjugatorGame() {
           <span className="translation">{verb.translation}</span>
         </div>
 
+        <div className="accent-characters">
+          {chipData.map(data => {
+            return (
+              <Chip
+                key={data.key}
+                label={data.label}
+                onClick={handleClick(data)}
+              />
+            );
+          })}
+        </div>
+
         <div className="subject-input-container">
           <span id="subject">{verb.performer}</span>
 
@@ -141,7 +183,7 @@ export default function ConjugatorGame() {
             id="outlined-name"
             name="value"
             onChange={handleChange}
-            placeholder="enter conjugated verb"
+            placeholder={answer ? `${data.answer}` : `Enter your conjugation`}
             value={verb.value}
             margin="normal"
             variant="outlined"
@@ -156,20 +198,20 @@ export default function ConjugatorGame() {
             Submit
           </Button>
         </div>
-        
-        <div className={classes.root}>
-          {chipData.map(data => {
 
-            return (
-              <Chip
-                key={data.key}
-                label={data.label}
-                onClick={handleClick(data)}
-                className={classes.chip}
-              />
-            );
-          })}
-        </div>
+        <Grid item>
+          <ButtonGroup
+            variant="contained"
+            size="small"
+            aria-label="small contained button group"
+          >
+            <Button onClick={skipVerb} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>{buttonText ? " Pase " : "Skip"}</Button>
+            <Button onClick={toggleAnswer}>
+              {answer ? `Hide Answer` : `Show Answer`}
+            </Button>
+          </ButtonGroup>
+        </Grid>
+        {/* {answer && <p>{data.answer}</p>} */}
         <ProgressBar className="progress-bar" completed={completed} />
       </form>
     </Paper>
