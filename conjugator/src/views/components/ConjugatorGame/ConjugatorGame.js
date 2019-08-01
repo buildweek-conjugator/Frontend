@@ -13,7 +13,7 @@ import Chip from "@material-ui/core/Chip";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
-const data = {
+const data = [{
   answer: "ubicaren",
   performer: "ellos/ellas/ustedes",
   mood: "Subjunctive",
@@ -23,7 +23,29 @@ const data = {
   has_long: false,
   translation: "to place; locate; to be located; be situated",
   value: ""
-};
+},
+{
+  answer: "llamo",
+  performer: "yo",
+  mood: "Subjunctive",
+  infinitive: "llamar",
+  performer_en: "them / you all (formal)",
+  tense: "Present",
+  has_long: false,
+  translation: "to call",
+  value: ""
+},
+{
+  answer: "tañed",
+  performer: "ella",
+  mood: "Imperative Affirmative",
+  infinitive: "tañer",
+  performer_en: "them / you all",
+  tense: "Present",
+  has_long: false,
+  translation: "to play",
+  value: ""
+}];
 
 // step1: axios.get - get relevant user settings for which verb forms to show
 // step2: axios.get - retrieve random unconjugated verb and tense and from data base
@@ -31,8 +53,9 @@ const data = {
 // step4: axios.post - posts request to check if answer is correct
 
 export default function ConjugatorGame() {
-  const [verb, setVerb] = useState(data);
+  // const [verb, setVerb] = useState(data);
   const [completed, setCompleted] = useState(0);
+  const [verb, setVerb] = useState(data[completed]);
   const [answer, setAnswer] = useState(null);
 
   //random array of numbers to test
@@ -71,9 +94,13 @@ export default function ConjugatorGame() {
     const targetInput = event.target.value;
 
     if (verb.value.toLowerCase() === verb.answer) {
-      setCompleted(completed + 10);
+      setCompleted(completed + 1);
       targetInput.style = "background:#D9EFDE;";
-
+      
+      // placeholder to demo app until api is connected
+      
+      setVerb(data[completed+1])
+      
       // setTimeout(function(){randomAxios()}, 2000)
     } else {
       targetInput.style = "background:#F8D7DA;";
@@ -99,6 +126,7 @@ export default function ConjugatorGame() {
 
   const skipVerb = () => {
     // api call for new word
+    setVerb(data[completed+1])
   };
 
   const toggleAnswer = () => {
@@ -109,6 +137,15 @@ export default function ConjugatorGame() {
     }
   };
 
+  const [buttonText, setButtonText] = useState(false)
+  const hoverOn = () => {
+    setButtonText(true)
+  };
+
+  const hoverOff = () => {
+    setButtonText(false)
+  };
+
   return (
     <Paper className="game-container">
       <form
@@ -117,6 +154,7 @@ export default function ConjugatorGame() {
         autoComplete="off"
         onSubmit={handleSubmit}
       >
+
         <div className="tense-mood-container">
           <span>{verb.tense} tense</span>
           <span>{verb.mood} mood</span>
@@ -167,7 +205,7 @@ export default function ConjugatorGame() {
             size="small"
             aria-label="small contained button group"
           >
-            <Button onClick={skipVerb}>Skip</Button>
+            <Button onClick={skipVerb} onMouseEnter={hoverOn} onMouseLeave={hoverOff}>{buttonText ? " Pase " : "Skip"}</Button>
             <Button onClick={toggleAnswer}>
               {answer ? `Hide Answer` : `Show Answer`}
             </Button>
