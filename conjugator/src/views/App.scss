@@ -6,19 +6,22 @@
   color: #333;
   // background-color: #AA151B;
   font-family: 'PT Sans', sans-serif;
-  background-image: url('../sw-bg.jpg');
 
+  width: 100%;
+  margin: 0 auto;
+  min-height: 100%;
+  position: relative;
+  padding-bottom: 60px;
 
   .app-container-holder {
     display: flex;
     align-items: center;
-    // flex-direction: column;
     width: 80vw;
     .app-container {
       width: 80vw;
       height: 100vw;
       padding: 3rem;
-
+      background-image: url('../spanish-flag.jpg');
     }
   }
 }
