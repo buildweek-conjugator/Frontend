@@ -188,4 +188,3 @@ function SignUp(props) {
   );
 }
 export default SignUp;
-
