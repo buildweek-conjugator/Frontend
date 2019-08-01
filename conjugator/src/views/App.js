@@ -12,6 +12,7 @@ import './App.scss';
 import Authentication from './pages/Authentication/Authentication';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import ConjugatorGame from './components/ConjugatorGame/ConjugatorGame';
+import IconBreadcrumbs from './components/FooterNav/FooterNav';
 function App() {
   return (
     <div className="App">
@@ -29,8 +30,10 @@ function App() {
             <Route path="/dashboard/" component={UserDashboard} />
             <Route path="/" component={Authentication} />
           </Switch>
-        </Paper>
-      </div>
+    </Paper>
+
+    </div>
+<IconBreadcrumbs/>
     </div>
   );
 }

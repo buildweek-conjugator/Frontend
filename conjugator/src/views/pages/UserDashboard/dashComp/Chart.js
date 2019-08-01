@@ -32,10 +32,11 @@ export default function Chart() {
   return (
     <React.Fragment>
       <Title>Your progress!</Title>
-      <div className= "chartCon">
-        <LineChart className = "lineChart"
-          width={700}
-          height={350}
+      <div className="chartCon">
+        <LineChart
+          className="lineChart"
+          height={300}
+          width={400}
           data={data}
           margin={{
             top: 16,
@@ -47,7 +48,7 @@ export default function Chart() {
           <XAxis dataKey="date" />
           <YAxis>
             <Label angle={270} position="left" style={{ textAnchor: 'middle' }}>
-              Conjugator Score
+              Score
             </Label>
           </YAxis>
           <Line type="monotone" dataKey="amount" stroke="#556CD6" dot={false} />
