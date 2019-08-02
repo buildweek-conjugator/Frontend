@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
+import { useStore, useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 import { makeStyles, withStyles } from '@material-ui/core/styles';
@@ -11,17 +12,12 @@ import MenuIcon from '@material-ui/icons/Menu';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Switch from '@material-ui/core/Switch';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
-import FormGroup from '@material-ui/core/FormGroup';
+
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
 import { createMuiTheme } from '@material-ui/core/styles';
 
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import DraftsIcon from '@material-ui/icons/Drafts';
-import SendIcon from '@material-ui/icons/Send';
-
+import { logout } from '../../../state/actions';
 import './MenuAppBar.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -76,18 +72,21 @@ const StyledMenuItem = withStyles(theme => ({
   }
 }))(MenuItem);
 
-export default function MenuAppBar() {
-  const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
-  const [anchorEl, setAnchorEl] = React.useState(null);
-  const user_open = Boolean(anchorEl);
-  const open = Boolean(anchorEl);
-  const main_open = Boolean(anchorEl);
-  const [menuState, setMenuState] = useState(false);
+function MenuAppBar() {
 
-  function handleChange(event) {
-    setAuth(event.target.checked);
-  }
+  const store = useStore()
+  const dispatch = useDispatch();
+
+  const authStatus = localStorage.getItem("auth");
+
+  const classes = useStyles();
+  const [auth, setAuth] =  React.useState(localStorage.getItem("auth"));
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+  const open = Boolean(anchorEl);
+
+  const [menuState, setMenuState] = useState(false);
 
   function handleUserMenu(event) {
     setAnchorEl(event.currentTarget);
@@ -101,6 +100,11 @@ export default function MenuAppBar() {
 
   function handleClose() {
     setAnchorEl(null);
+  }
+
+  function handleLogout() {
+    setAuth(false);
+    dispatch(logout());
   }
 
   return (
@@ -151,25 +155,17 @@ export default function MenuAppBar() {
                   <NavLink className="dropButton" to="/">
                     {' '}
                     <MenuItem onClick={handleClose}>Login</MenuItem>
+                    {' '}
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
                   </NavLink>
                 </Menu>
               </div>
             )}
           </Toolbar>
         </AppBar>
-        <FormGroup>
-          <FormControlLabel
-            control={
-              <Switch
-                checked={auth}
-                onChange={handleChange}
-                aria-label="login switch"
-              />
-            }
-            label={auth ? 'Logout' : 'Login'}
-          />
-        </FormGroup>
+
       </ThemeProvider>
     </div>
   );
 }
+export default  MenuAppBar
