@@ -12,7 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
-import { login } from '../../../state/actions';
+import { login, newUser } from '../../../state/actions';
 import './Authentication.scss';
 
 const useStyles = makeStyles(theme => ({
@@ -66,6 +66,16 @@ function SignUp(props) {
           props.history.push('/dashboard');
         }
       });
+    } if (action == 'signup') {
+      const creds = { email: user.email, password: user.password, first_name: user.firstName, last_name: user.lastName };
+      console.log(creds)
+      dispatch(newUser(creds)).then(res => {
+        if (res) {
+          console.log(res);
+          props.history.push('/dashboard');
+        }
+      });
+
     }
   }
   const [user, setUser] = useState(initialFormState);

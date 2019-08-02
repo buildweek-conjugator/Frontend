@@ -3,6 +3,7 @@ import * as actions from "../actions";
 const initialState = {
   token: localStorage.getItem("token"),
   username: localStorage.getItem("username"),
+  auth: localStorage.getItem("auth"),
   loggingIn: false,
   authError: '',
   getWordError: '',
@@ -36,8 +37,10 @@ const reducer = (state = initialState, action) => {
     case actions.LOGIN_SUCCESS:
       localStorage.setItem("token", action.payload.token);
       localStorage.setItem("username", action.payload.username);
+      localStorage.setItem("auth", true);
       return {
         ...state,
+        auth: true,
         loggingIn: false,
         token: action.payload.token,
         username: action.payload.username,
@@ -50,11 +53,14 @@ const reducer = (state = initialState, action) => {
         authError: action.payload
       };
     case actions.LOGOUT:
+      console.log('logout')
       localStorage.setItem('token', '');
       localStorage.setItem('username', '');
-      localStorage.setItem('filteredSettings', null);
+      localStorage.setItem("auth", false);
+      // localStorage.setItem('filteredSettings', null);
       return {
         ...state,
+        auth: false,
         loggingIn: false,
         authError: '',
         token: '',

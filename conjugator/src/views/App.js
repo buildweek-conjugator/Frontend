@@ -13,10 +13,10 @@ import Authentication from './pages/Authentication/Authentication';
 import UserDashboard from './pages/UserDashboard/UserDashboard';
 import ConjugatorGame from './components/ConjugatorGame/ConjugatorGame';
 import IconBreadcrumbs from './components/FooterNav/FooterNav';
-function App() {
+function App(props) {
   return (
     <div className="App">
-      <MenuAppBar />
+      <MenuAppBar props={props}/>
       <div className="app-container-holder">
         <Paper className="app-container">
           <Typography className="app-h2" variant="h2" component="h2">
