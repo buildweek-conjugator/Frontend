@@ -13,6 +13,7 @@ import Chip from "@material-ui/core/Chip";
 
 import ProgressBar from "../ProgressBar/ProgressBar";
 
+import Loader from 'react-loader-spinner';
 
 const data = {
   answer: "ubicaren",
@@ -66,7 +67,11 @@ const dataArr = [{
 // step4: axios.post - posts request to check if answer is correct
 
 export default function ConjugatorGame() {
-  const [verb, setVerb] = useState(data);
+
+
+  const [verb, setVerb] = useState({});
+  const [input, setInput] = useState('');
+
   const [completed, setCompleted] = useState(0);
   // const [verb, setVerb] = useState(dataArr[completed]);
   const [answer, setAnswer] = useState(null);
@@ -74,31 +79,49 @@ export default function ConjugatorGame() {
   //random array of numbers to test
   const [usedWords, setUsedWords] = useState([1, 2, 5, 7, 9]);
 
+
+  function axiosGet () {
+
+    axios.get(`https://conjugator-bw-api.herokuapp.com/api/verbs/${getRandomInt(638)}`)
+      .then(response => {
+        console.table("Question Data", response.data)
+
+        setVerb(response.data)
+        setInput('')
+        setAnswer(null)
+      })
+  }
+
+  useEffect( () => {
+    axiosGet()
+ }, [] )
+
+
+
+
   function getRandomInt(max) {
-    let randoInt = Math.floor(Math.random() * Math.floor(max));
-    console.log(
-      randoInt,
-      " appears ",
-      usedWords.indexOf(randoInt),
-      " in the array"
-    );
-    //code to see if number has already been used this session
-    //if it is not in the array (-1) its a good int
-    //otherwise its a bad int and we need to get a new number
-    if (usedWords.indexOf(randoInt) === -1) {
-      console.log("good int");
-      return randoInt;
-    } else {
-      console.log("bad int");
-      return getRandomInt(max);
-    }
+    return Math.floor(Math.random() * Math.floor(max));
+    // let randoInt = Math.floor(Math.random() * Math.floor(max));
+    // console.log(
+    //   randoInt,
+    //   " appears ",
+    //   usedWords.indexOf(randoInt),
+    //   " in the array"
+    // );
+    // //code to see if number has already been used this session
+    // //if it is not in the array (-1) its a good int
+    // //otherwise its a bad int and we need to get a new number
+    // if (usedWords.indexOf(randoInt) === -1) {
+    //   console.log("good int");
+    //   return randoInt;
+    // } else {
+    //   console.log("bad int");
   }
 
   const handleChange = event => {
     let textField = document.getElementById("outlined-name");
     textField.style = "background:white;";
-
-    setVerb({ ...verb, [event.target.name]: event.target.value });
+    setInput(event.target.value)
   };
 
   const handleSubmit = event => {
@@ -106,14 +129,15 @@ export default function ConjugatorGame() {
     // console.log("event.target.value", event.target.value)
     const targetInput = event.target.value;
 
-    if (verb.value.toLowerCase() === verb.answer) {
+
+    if (input.toLowerCase() === verb.answer) {
       setCompleted(completed + 1);
       targetInput.style = "background:#D9EFDE;";
-      
+
       // placeholder to demo app until api is connected
-      
-      setVerb(dataArr[completed+1])
-      
+
+      // setVerb(dataArr[completed+1])
+      axiosGet()
       // setTimeout(function(){randomAxios()}, 2000)
     } else {
       targetInput.style = "background:#F8D7DA;";
@@ -134,18 +158,20 @@ export default function ConjugatorGame() {
   ]);
 
   const handleClick = chipClicked => () => {
-    setVerb({ ...verb, value: verb.value + `${chipClicked.label}` });
+    setInput(input + `${chipClicked.label}`)
+
   };
 
   const skipVerb = () => {
     // api call for new word
-    setVerb(dataArr[completed+1])
+    // setVerb(dataArr[completed+1])
+    axiosGet()
   };
 
   const toggleAnswer = () => {
     console.log(answer)
     if (answer === null) {
-      setAnswer(data.answer);
+      setAnswer(verb.answer);
     } else {
       setAnswer(null);
     }
@@ -162,6 +188,20 @@ export default function ConjugatorGame() {
 
   return (
     <Paper className="game-container">
+  <>
+  {verb.infinitive === undefined ? (
+      <div className="key spinner">
+        <Loader
+            type="Puff"
+            color="#204963"
+            height="60"
+            width="60"
+        />
+        <p>Loading Data</p>
+      </div>
+    ) : (
+
+
       <form
         className="form-container"
         noValidate
@@ -170,12 +210,12 @@ export default function ConjugatorGame() {
       >
 
         <div className="tense-mood-container">
-          <span>{verb.tense} tense</span>
-          <span>{verb.mood} mood</span>
+          <span>{verb.tense_english} tense</span>
+          <span>{verb.mood_english} mood</span>
         </div>
         <div className="verb-translation-container">
-          <span className="verb">{verb.infinitive.toUpperCase()}</span>
-          <span className="translation">{verb.translation}</span>
+    <span className="verb">{!verb.infinitive ? verb.infinitive : verb.infinitive.toUpperCase()}</span>
+          <span className="translation">to {verb.short_english_verb}</span>
         </div>
 
         <div className="accent-characters">
@@ -191,14 +231,14 @@ export default function ConjugatorGame() {
         </div>
 
         <div className="subject-input-container">
-          <span id="subject">{verb.performer}</span>
+          <span id="subject">{verb.pronoun_spanish}</span>
 
           <TextField
             id="outlined-name"
             name="value"
             onChange={handleChange}
-            placeholder={answer ? `${data.answer}` : `Enter your conjugation`}
-            value={verb.value}
+            placeholder={answer ? `${verb.answer}` : `Enter your conjugation`}
+            value={input}
             margin="normal"
             variant="outlined"
           />
@@ -228,6 +268,9 @@ export default function ConjugatorGame() {
         {/* {answer && <p>{data.answer}</p>} */}
         <ProgressBar className="progress-bar" completed={completed} />
       </form>
+
+    )}
+    </>
     </Paper>
   );
 }

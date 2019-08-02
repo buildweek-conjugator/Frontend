@@ -12,6 +12,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 
+
 import { login, newUser } from '../../../state/actions';
 import './Authentication.scss';
 
@@ -198,4 +199,3 @@ function SignUp(props) {
   );
 }
 export default SignUp;
-
